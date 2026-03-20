@@ -21,6 +21,7 @@ body {
     background: white;
     opacity: 0.6;
     z-index: 0;
+    pointer-events: none; /* FIX */
 }
 
 /* 👽 + 🛸 */
@@ -28,7 +29,7 @@ body {
     position: fixed;
     font-size: 30px;
     z-index: 2;
-    pointer-events: none;
+    pointer-events: none; /* FIX */
 }
 
 /* TEXT */
@@ -93,7 +94,7 @@ p {
 <body>
 
 <h1>Hi, I'm Srushti 👋</h1>
-<p>Exploring the universe of Web Development 🚀</p>
+<p>Lost in space building cool things 🚀</p>
 
 <div class="box hidden">
 <h2>About Me</h2>
@@ -118,7 +119,7 @@ p {
 
 <script>
 
-/* ⭐ STARS (subtle, not distracting) */
+/* ⭐ STARS */
 for (let i = 0; i < 120; i++) {
     let star = document.createElement("div");
     star.className = "star";
@@ -127,7 +128,7 @@ for (let i = 0; i < 120; i++) {
     document.body.appendChild(star);
 }
 
-/* 👽🛸 SMOOTH FLOATING OBJECTS */
+/* 👽🛸 RANDOM FLOATERS */
 const emojis = ["👽","🛸"];
 let movers = [];
 
@@ -164,11 +165,9 @@ function animate() {
         obj.x += obj.dx;
         obj.y += obj.dy;
 
-        // bounce edges
         if (obj.x <= 0 || obj.x >= window.innerWidth - 40) obj.dx *= -1;
         if (obj.y <= 0 || obj.y >= window.innerHeight - 40) obj.dy *= -1;
 
-        // rare smooth direction change
         if (Math.random() < 0.005) {
             let angle = Math.random() * 2 * Math.PI;
             let speed = Math.random() * 1.2 + 0.5;
@@ -185,7 +184,7 @@ function animate() {
 
 animate();
 
-/* SCROLL ANIMATION */
+/* SCROLL */
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {

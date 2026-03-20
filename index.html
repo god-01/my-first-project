@@ -127,6 +127,16 @@
         <h2>Contact</h2>
         <p>Email: srusam123456@gmail.com</p>
     </div>
+<script>
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+        });
+    });
 
+    document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
+</script>
 </body>
 </html>

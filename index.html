@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Srushti | Space Chaos 👽</title>
+<title>Srushti | Space Portfolio 👽</title>
 
 <style>
 body {
     margin: 0;
     background: black;
     color: #e2e8f0;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
-/* STARS */
+/* ⭐ STARS */
 .star {
     position: fixed;
     width: 2px;
     height: 2px;
     background: white;
-    opacity: 0.8;
+    opacity: 0.6;
+    z-index: 0;
 }
 
-/* MOVING OBJECTS */
+/* 👽 + 🛸 */
 .mover {
     position: fixed;
-    font-size: 35px;
-    z-index: 5;
+    font-size: 30px;
+    z-index: 2;
     pointer-events: none;
 }
 
-/* CONTENT */
+/* TEXT */
 h1 {
-    margin-top: 60px;
+    margin-top: 80px;
     font-size: 40px;
     position: relative;
     z-index: 10;
@@ -44,14 +45,47 @@ p {
     z-index: 10;
 }
 
+/* CARDS */
 .box {
     background: rgba(15, 23, 42, 0.7);
     padding: 25px;
-    margin: 40px auto;
+    margin: 60px auto;
     width: 60%;
     border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(6px);
+    transition: 0.3s;
     position: relative;
     z-index: 10;
+}
+
+.box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 20px rgba(59,130,246,0.3);
+}
+
+/* BUTTON */
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #020617;
+    color: #cbd5f5;
+    text-decoration: none;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* SCROLL ANIMATION */
+.hidden {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 0.8s ease;
 }
 </style>
 </head>
@@ -59,41 +93,55 @@ p {
 <body>
 
 <h1>Hi, I'm Srushti 👋</h1>
-<p>Lost in space building cool things 🚀</p>
+<p>Exploring the universe of Web Development 🚀</p>
 
-<div class="box">About Me</div>
-<div class="box">Skills</div>
-<div class="box">Projects</div>
-<div class="box">Contact</div>
+<div class="box hidden">
+<h2>About Me</h2>
+<p>I’m building projects and learning to become freelance-ready.</p>
+</div>
+
+<div class="box hidden">
+<h2>Skills</h2>
+<p>HTML | CSS | JavaScript (learning)</p>
+</div>
+
+<div class="box hidden">
+<h2>Projects</h2>
+<p>My First Website 🚀</p>
+<a href="#" class="btn">View Project</a>
+</div>
+
+<div class="box hidden">
+<h2>Contact</h2>
+<p>Email: srusam123456@gmail.com</p>
+</div>
 
 <script>
 
-// ⭐ STARS
-for (let i = 0; i < 200; i++) {
+/* ⭐ STARS (subtle, not distracting) */
+for (let i = 0; i < 120; i++) {
     let star = document.createElement("div");
     star.className = "star";
-    star.style.top = Math.random() * window.innerHeight + "px";
-    star.style.left = Math.random() * window.innerWidth + "px";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.left = Math.random() * 100 + "vw";
     document.body.appendChild(star);
 }
 
-// 👽🛸 OBJECTS
-const emojis = ["👽","🛸","👾","✨"];
+/* 👽🛸 SMOOTH FLOATING OBJECTS */
+const emojis = ["👽","🛸"];
 let movers = [];
 
-for (let i = 0; i < 8; i++) {
+for (let i = 0; i < 3; i++) {
 
     let el = document.createElement("div");
     el.className = "mover";
     el.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
 
-    // RANDOM START POSITION
     let x = Math.random() * window.innerWidth;
     let y = Math.random() * window.innerHeight;
 
-    // RANDOM DIRECTION (FULL RANGE)
     let angle = Math.random() * 2 * Math.PI;
-    let speed = Math.random() * 3 + 1;
+    let speed = Math.random() * 1.2 + 0.5;
 
     let obj = {
         el: el,
@@ -110,7 +158,6 @@ for (let i = 0; i < 8; i++) {
     movers.push(obj);
 }
 
-// 🧠 TRUE RANDOM MOTION LOOP
 function animate() {
     movers.forEach(obj => {
 
@@ -118,17 +165,13 @@ function animate() {
         obj.y += obj.dy;
 
         // bounce edges
-        if (obj.x <= 0 || obj.x >= window.innerWidth - 40) {
-            obj.dx *= -1;
-        }
-        if (obj.y <= 0 || obj.y >= window.innerHeight - 40) {
-            obj.dy *= -1;
-        }
+        if (obj.x <= 0 || obj.x >= window.innerWidth - 40) obj.dx *= -1;
+        if (obj.y <= 0 || obj.y >= window.innerHeight - 40) obj.dy *= -1;
 
-        // RANDOM CHAOS SHIFT (THIS IS THE MAGIC)
-        if (Math.random() < 0.02) {
+        // rare smooth direction change
+        if (Math.random() < 0.005) {
             let angle = Math.random() * 2 * Math.PI;
-            let speed = Math.random() * 3 + 1;
+            let speed = Math.random() * 1.2 + 0.5;
             obj.dx = Math.cos(angle) * speed;
             obj.dy = Math.sin(angle) * speed;
         }
@@ -141,6 +184,17 @@ function animate() {
 }
 
 animate();
+
+/* SCROLL ANIMATION */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
 
 </script>
 

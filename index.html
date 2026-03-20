@@ -1,38 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Srushti | Space Portfolio 👽</title>
+<title>Srushti | Space Portfolio 👽</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: radial-gradient(circle at bottom, #020617, #000000);
+    background: black;
     color: #e2e8f0;
     text-align: center;
     overflow-x: hidden;
 }
 
-/* ⭐ STARS BACKGROUND */
-body::before {
-    content: "";
+/* ⭐ STARS (PURE CSS) */
+.stars {
     position: fixed;
-    width: 200%;
-    height: 200%;
-    background: url('https://www.transparenttextures.com/patterns/stardust.png');
-    animation: moveStars 60s linear infinite;
-    opacity: 0.2;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    box-shadow:
+    100px 200px white,
+    300px 400px white,
+    500px 100px white,
+    700px 300px white,
+    900px 600px white,
+    200px 800px white,
+    400px 900px white,
+    800px 700px white,
+    1200px 500px white;
+    animation: moveStars 50s linear infinite;
 }
 
 @keyframes moveStars {
-    from { transform: translate(0,0); }
-    to { transform: translate(-500px, -500px); }
+    from { transform: translateY(0); }
+    to { transform: translateY(-1000px); }
 }
 
 /* 👽 ALIEN */
 .alien {
     position: fixed;
-    bottom: 50px;
+    bottom: 40px;
     left: -100px;
     font-size: 40px;
     animation: walkAlien 20s linear infinite;
@@ -46,45 +54,42 @@ body::before {
 /* 🛸 UFO */
 .ufo {
     position: fixed;
-    top: 80px;
+    top: 60px;
     left: -150px;
     font-size: 50px;
-    animation: flyUFO 15s linear infinite;
+    animation: flyUFO 12s linear infinite;
 }
 
 @keyframes flyUFO {
-    0% { left: -150px; transform: translateY(0); }
-    50% { transform: translateY(40px); }
-    100% { left: 110%; transform: translateY(0); }
+    0% { left: -150px; }
+    100% { left: 110%; }
 }
 
-/* TITLE */
+/* TEXT */
 h1 {
     font-size: 42px;
     margin-top: 80px;
 }
 
-/* TEXT */
 p {
     color: #94a3b8;
 }
 
 /* CARDS */
 .box {
-    background: rgba(15, 23, 42, 0.6);
+    background: rgba(15, 23, 42, 0.7);
     padding: 25px;
     margin: 60px auto;
     width: 60%;
     border-radius: 15px;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(6px);
     border: 1px solid rgba(255,255,255,0.05);
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
-/* HOVER GLOW */
 .box:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 0 25px rgba(59,130,246,0.3);
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(59,130,246,0.3);
 }
 
 /* BUTTON */
@@ -97,12 +102,6 @@ p {
     text-decoration: none;
     border-radius: 20px;
     border: 1px solid rgba(255,255,255,0.1);
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: rgba(59,130,246,0.2);
-    box-shadow: 0 0 15px rgba(59,130,246,0.4);
 }
 
 /* SCROLL ANIMATION */
@@ -114,41 +113,40 @@ p {
 .show {
     opacity: 1;
     transform: translateY(0);
-    transition: all 1s ease;
+    transition: 1s;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 👽 Alien -->
-<div class="alien">👽</div>
+<div class="stars"></div>
 
-<!-- 🛸 UFO -->
+<div class="alien">👽</div>
 <div class="ufo">🛸</div>
 
 <h1>Hi, I'm Srushti 👋</h1>
 <p>Exploring the universe of Web Development 🚀</p>
 
 <div class="box hidden">
-    <h2>About Me</h2>
-    <p>I’m building projects and learning to become freelance-ready.</p>
+<h2>About Me</h2>
+<p>I’m building projects and learning to become freelance-ready.</p>
 </div>
 
 <div class="box hidden">
-    <h2>Skills</h2>
-    <p>HTML | CSS | JavaScript (learning)</p>
+<h2>Skills</h2>
+<p>HTML | CSS | JavaScript (learning)</p>
 </div>
 
 <div class="box hidden">
-    <h2>Projects</h2>
-    <p>My First Website 🚀</p>
-    <a href="#" class="btn">View Project</a>
+<h2>Projects</h2>
+<p>My First Website 🚀</p>
+<a href="#" class="btn">View Project</a>
 </div>
 
 <div class="box hidden">
-    <h2>Contact</h2>
-    <p>Email: srusam123456@gmail.com</p>
+<h2>Contact</h2>
+<p>Email: srusam123456@gmail.com</p>
 </div>
 
 <script>
@@ -158,8 +156,6 @@ const observer = new IntersectionObserver(entries => {
             entry.target.classList.add("show");
         }
     });
-}, {
-    threshold: 0.2
 });
 
 document.querySelectorAll(".hidden").forEach(el => observer.observe(el));

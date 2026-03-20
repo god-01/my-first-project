@@ -13,56 +13,31 @@ body {
     overflow-x: hidden;
 }
 
-/* ⭐ STARS (PURE CSS) */
-.stars {
+/* ⭐ STARS */
+.star {
     position: fixed;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    box-shadow:
-    100px 200px white,
-    300px 400px white,
-    500px 100px white,
-    700px 300px white,
-    900px 600px white,
-    200px 800px white,
-    400px 900px white,
-    800px 700px white,
-    1200px 500px white;
-    animation: moveStars 50s linear infinite;
+    width: 2px;
+    height: 2px;
+    background: white;
+    opacity: 0.8;
+    animation: twinkle 2s infinite alternate;
 }
 
-@keyframes moveStars {
-    from { transform: translateY(0); }
-    to { transform: translateY(-1000px); }
+@keyframes twinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
 }
 
 /* 👽 ALIEN */
 .alien {
     position: fixed;
-    bottom: 40px;
-    left: -100px;
-    font-size: 40px;
-    animation: walkAlien 20s linear infinite;
-}
-
-@keyframes walkAlien {
-    0% { left: -100px; }
-    100% { left: 110%; }
+    font-size: 35px;
 }
 
 /* 🛸 UFO */
 .ufo {
     position: fixed;
-    top: 60px;
-    left: -150px;
-    font-size: 50px;
-    animation: flyUFO 12s linear infinite;
-}
-
-@keyframes flyUFO {
-    0% { left: -150px; }
-    100% { left: 110%; }
+    font-size: 45px;
 }
 
 /* TEXT */
@@ -104,7 +79,7 @@ p {
     border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* SCROLL ANIMATION */
+/* SCROLL */
 .hidden {
     opacity: 0;
     transform: translateY(60px);
@@ -119,11 +94,6 @@ p {
 </head>
 
 <body>
-
-<div class="stars"></div>
-
-<div class="alien">👽</div>
-<div class="ufo">🛸</div>
 
 <h1>Hi, I'm Srushti 👋</h1>
 <p>Exploring the universe of Web Development 🚀</p>
@@ -150,6 +120,63 @@ p {
 </div>
 
 <script>
+/* ⭐ CREATE RANDOM STARS */
+for (let i = 0; i < 150; i++) {
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.animationDuration = (Math.random() * 2 + 1) + "s";
+    document.body.appendChild(star);
+}
+
+/* 👽 RANDOM ALIENS */
+for (let i = 0; i < 3; i++) {
+    let alien = document.createElement("div");
+    alien.className = "alien";
+    alien.innerHTML = "👽";
+
+    let top = Math.random() * 80;
+    let speed = Math.random() * 10 + 10;
+
+    alien.style.top = top + "vh";
+    alien.style.left = "-100px";
+
+    alien.animate([
+        { transform: "translateX(0px)" },
+        { transform: "translateX(120vw)" }
+    ], {
+        duration: speed * 1000,
+        iterations: Infinity
+    });
+
+    document.body.appendChild(alien);
+}
+
+/* 🛸 RANDOM UFOs */
+for (let i = 0; i < 2; i++) {
+    let ufo = document.createElement("div");
+    ufo.className = "ufo";
+    ufo.innerHTML = "🛸";
+
+    let top = Math.random() * 50;
+    let speed = Math.random() * 8 + 8;
+
+    ufo.style.top = top + "vh";
+    ufo.style.left = "-150px";
+
+    ufo.animate([
+        { transform: "translateX(0px) translateY(0px)" },
+        { transform: "translateX(120vw) translateY(40px)" }
+    ], {
+        duration: speed * 1000,
+        iterations: Infinity
+    });
+
+    document.body.appendChild(ufo);
+}
+
+/* SCROLL ANIMATION */
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {

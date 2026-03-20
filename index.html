@@ -2,8 +2,9 @@
 <html>
 <head>
     <title>Srushti | Portfolio</title>
-  <style>
-   body {
+
+<style>
+body {
     font-family: Arial, sans-serif;
     background: linear-gradient(-45deg, #0f172a, #1e293b, #3b82f6, #0f172a);
     background-size: 400% 400%;
@@ -13,25 +14,29 @@
     padding: 50px;
     margin: 0;
 }
-      @keyframes gradientBG {
+
+/* Background animation */
+@keyframes gradientBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-    h1 {
+
+h1 {
     font-size: 40px;
     display: inline-block;
 }
 
-    p {
-        font-size: 18px;
-        color: #cbd5f5;
-    }
+p {
+    font-size: 18px;
+    color: #cbd5f5;
+}
 
-   .box {
+/* Glass cards */
+.box {
     background: rgba(30, 41, 59, 0.6);
-    padding: 20px;
-    margin: 20px auto;
+    padding: 25px;
+    margin: 60px auto; /* increased for scroll */
     width: 60%;
     border-radius: 15px;
     backdrop-filter: blur(10px);
@@ -39,12 +44,14 @@
     transition: all 0.3s ease;
 }
 
+/* Hover effect */
 .box:hover {
     transform: translateY(-10px) scale(1.03);
     box-shadow: 0 0 30px rgba(59,130,246,0.6);
 }
 
-    .btn {
+/* Button */
+.btn {
     display: inline-block;
     margin-top: 10px;
     padding: 12px 25px;
@@ -59,84 +66,77 @@
     transform: scale(1.1);
     box-shadow: 0 0 20px #3b82f6;
 }
-      .hidden {
+
+/* Scroll animation */
+.hidden {
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 1s ease;
+    transform: translateY(60px);
 }
 
 .show {
     opacity: 1;
     transform: translateY(0);
+    transition: all 1s ease;
 }
 
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-   .typing {
+/* Typing effect */
+.typing {
     overflow: hidden;
     border-right: 3px solid white;
     white-space: nowrap;
     width: 0;
     margin: 0 auto;
     display: inline-block;
-    animation: typing 3s steps(15, end) forwards;
-}
-@keyframes typing {
-    from { width: 0 }
-    to { width: 15ch; } /* adjust based on text length */
+    animation: typing 3s steps(22, end) forwards;
 }
 
-@keyframes blink {
-    50% { border-color: transparent }
+@keyframes typing {
+    from { width: 0 }
+    to { width: 22ch; }
 }
-      
+
 </style>
 </head>
 
 <body>
 
-  <h1 class="typing">Hi, I'm Srushti 👋</h1>
-  
-    <p>Aspiring Web Developer & Entrepreneur</p>
+<h1 class="typing">Hi, I'm Srushti 👋</h1>
+<p>Aspiring Web Developer & Entrepreneur</p>
 
-  <div class="box hidden">
-        <h2>About Me</h2>
-        <p>I’m learning web development and building projects to become freelance-ready.</p>
-    </div>
+<div class="box hidden">
+    <h2>About Me</h2>
+    <p>I’m learning web development and building projects to become freelance-ready.</p>
+</div>
 
-   <div class="box hidden">
-        <h2>Skills</h2>
-        <p>HTML | CSS | JavaScript (learning)</p>
-    </div>
+<div class="box hidden">
+    <h2>Skills</h2>
+    <p>HTML | CSS | JavaScript (learning)</p>
+</div>
 
- <div class="box hidden">
- <h2>Projects</h2>
-<p>My First Website 🚀</p>
-<a href="#" class="btn">View Project</a>
-    </div>
+<div class="box hidden">
+    <h2>Projects</h2>
+    <p>My First Website 🚀</p>
+    <a href="#" class="btn">View Project</a>
+</div>
 
-   <div class="box hidden">
-        <h2>Contact</h2>
-        <p>Email: srusam123456@gmail.com</p>
-    </div>
+<div class="box hidden">
+    <h2>Contact</h2>
+    <p>Email: srusam123456@gmail.com</p>
+</div>
+
 <script>
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("show");
-            }
-        });
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
     });
+}, {
+    threshold: 0.2
+});
 
-    document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
+document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
 </script>
+
 </body>
 </html>
